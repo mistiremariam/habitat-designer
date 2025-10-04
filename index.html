@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Habitat Mini-Game — Manage your space habitat, balance oxygen, power, water, and temperature to survive 24 hours in space." />
+  <title>Habitat Mini-Game</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="icon" href="assets/power.jpeg" type="image/jpeg">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- Star Background -->
+  <div class="stars"></div>
+  <div class="stars2"></div>
+  <div class="stars3"></div>
+
+  <!-- Header Section -->
+  <header class="top-bar">
+    <h1>🪐 Habitat Mini-Game</h1>
+    <div class="timer">
+      <span>Hour:</span>
+      <strong id="hour-display">1</strong> / 24
+    </div>
+  </header>
+
+  <!-- Game Container -->
+  <main class="game-container">
+
+    <!-- Left Section: Crew Management -->
+    <section class="crew-panel">
+      <h2>Crew Members</h2>
+      <p>Assign your astronauts to manage critical systems.</p>
+      <div class="crew-container">
+        <div class="crew" id="crew1" draggable="true">
+          <img src="assets/crew4.jpeg" alt="Crew Member 1" />
+          <span>Alex</span>
+        </div>
+        <div class="crew" id="crew2" draggable="true">
+          <img src="assets/crew3.jpeg" alt="Crew Member 2" />
+          <span>Mina</span>
+        </div>
+        <div class="crew" id="crew3" draggable="true">
+          <img src="assets/crew2.jpeg" alt="Crew Member 3" />
+          <span>Ravi</span>
+        </div>
+        <div class="crew" id="crew4" draggable="true">
+          <img src="assets/crew1.jpeg" alt="Crew Member 4" />
+          <span>Luna</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right Section: Habitat Systems -->
+    <section class="systems-panel">
+      <h2>Habitat Systems</h2>
+
+      <div class="system" data-system="oxygen">
+        <img src="assets/oxygen.jpeg" alt="Oxygen Icon">
+        <div class="system-info">
+          <h3>Oxygen</h3>
+          <div class="bar-container">
+            <div class="bar" id="oxygen-bar" style="width: 100%"></div>
+          </div>
+          <span id="oxygen-value">100%</span>
+        </div>
+      </div>
+
+      <div class="system" data-system="power">
+        <img src="assets/power.jpeg" alt="Power Icon">
+        <div class="system-info">
+          <h3>Power</h3>
+          <div class="bar-container">
+            <div class="bar" id="power-bar" style="width: 100%"></div>
+          </div>
+          <span id="power-value">100%</span>
+        </div>
+      </div>
+
+      <div class="system" data-system="water">
+        <img src="assets/water.jpeg" alt="Water Icon">
+        <div class="system-info">
+          <h3>Water</h3>
+          <div class="bar-container">
+            <div class="bar" id="water-bar" style="width: 100%"></div>
+          </div>
+          <span id="water-value">100%</span>
+        </div>
+      </div>
+
+      <div class="system" data-system="temperature">
+        <img src="assets/temp.jpeg" alt="Temperature Icon">
+        <div class="system-info">
+          <h3>Temperature</h3>
+          <div class="bar-container">
+            <div class="bar" id="temperature-bar" style="width: 100%"></div>
+          </div>
+          <span id="temperature-value">100%</span>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- Event Log + Next Hour Button -->
+  <section class="control-panel">
+    <div class="event-log">
+      <h3>Mission Log</h3>
+      <div id="event-text">Welcome Commander! Assign your crew and click “Next Hour” to begin your mission.</div>
+    </div>
+
+    <button id="next-hour-btn" class="next-btn">Next Hour ⏭️</button>
+  </section>
+  <div id="mars-data" class="data-display"></div>
+
+  <!-- Overlay for Win/Lose Messages -->
+  <div id="overlay" class="overlay hidden">
+    <div class="message-box">
+      <h2 id="end-message-title">Mission Status</h2>
+      <p id="end-message-text"></p>
+      <button id="restart-btn">Restart Mission</button>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script src="script.js"></script>
+</body>
+</html>
