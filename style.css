@@ -28,7 +28,7 @@ html, body {
 }
 
 .stars {
-  background-image: url('assets/stars1.png');
+  background-image: url('./assets/');
   animation: moveStars 100s linear infinite;
 }
 .stars2 {
