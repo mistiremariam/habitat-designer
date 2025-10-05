@@ -8,13 +8,13 @@
 html, body {
   height: 100%;
   font-family: "Poppins", sans-serif;
-  background: radial-gradient(ellipse at top, #0d0d0d 0%, #000 100%);
-  color: #f1f1f1;
+  background: radial-gradient(ellipse at top, #081024 0%, #030616 100%);
+  color: #e8f0ff;
   overflow: hidden;
 }
 
 /* ---------- STAR BACKGROUND LAYERS ---------- */
-.stars{
+.stars {
   position: fixed;
   width: 100%;
   height: 100%;
@@ -24,14 +24,10 @@ html, body {
   background-size: contain;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.3;
-}
-
-.stars {
+  opacity: 0.25;
   background-image: url('./assets/background.jpeg');
   animation: moveStars 100s linear infinite;
 }
-
 
 @keyframes moveStars {
   from { background-position: 0 0; }
@@ -46,23 +42,27 @@ html, body {
   justify-content: space-between;
   align-items: center;
   padding: 20px 40px;
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(10, 20, 50, 0.4);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(100, 180, 255, 0.2);
+  box-shadow: 0 2px 10px rgba(0, 10, 40, 0.5);
 }
 
 .top-bar h1 {
   font-weight: 600;
-  font-size: 1.5rem;
-  color: #fafafa;
-  letter-spacing: 1px;
+  font-size: 1.6rem;
+  color: #aee9ff;
+  letter-spacing: 1.5px;
+  text-shadow: 0 0 8px rgba(100, 200, 255, 0.4);
 }
 
 .timer {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(30, 50, 90, 0.6);
   padding: 8px 16px;
   border-radius: 10px;
   font-size: 1rem;
+  color: #d4f1ff;
+  box-shadow: 0 0 8px rgba(90, 170, 255, 0.2);
 }
 
 /* ---------- MAIN LAYOUT ---------- */
@@ -79,25 +79,25 @@ html, body {
 .crew-panel {
   flex: 1;
   max-width: 280px;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(10, 25, 60, 0.45);
   border-radius: 20px;
   padding: 25px;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 0 25px rgba(20, 80, 160, 0.2);
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
 }
 
 .crew-panel h2 {
   font-size: 1.3rem;
   margin-bottom: 5px;
-  color: #e0e0e0;
+  color: #b7d9ff;
 }
 
 .crew-panel p {
   font-size: 0.9rem;
   margin-bottom: 20px;
-  color: #b8b8b8;
+  color: #8cb8e3;
 }
 
 .crew-container {
@@ -107,46 +107,49 @@ html, body {
 }
 
 .crew {
-  background: rgba(255, 255, 255, 0.07);
+  background: rgba(30, 60, 120, 0.3);
   border-radius: 12px;
   padding: 10px;
   text-align: center;
   cursor: grab;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid rgba(100, 150, 255, 0.1);
 }
 
 .crew:hover {
-  transform: scale(1.05);
+  transform: scale(1.06);
+  box-shadow: 0 0 12px rgba(100, 200, 255, 0.3);
 }
 
 .crew img {
   width: 55px;
   margin-bottom: 6px;
+  filter: drop-shadow(0 0 5px rgba(120, 220, 255, 0.3));
 }
 
 .crew span {
   display: block;
   font-size: 0.9rem;
-  color: #eaeaea;
+  color: #d9e8ff;
 }
 
 /* ---------- SYSTEMS PANEL ---------- */
 .systems-panel {
   flex: 2;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(10, 25, 60, 0.45);
   border-radius: 20px;
   padding: 25px;
   margin-left: 40px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 0 30px rgba(20, 60, 120, 0.3);
 }
 
 .systems-panel h2 {
   font-size: 1.3rem;
   margin-bottom: 25px;
-  color: #e0e0e0;
+  color: #b7d9ff;
 }
 
 .system {
@@ -158,32 +161,34 @@ html, body {
 .system img {
   width: 45px;
   margin-right: 15px;
+  filter: drop-shadow(0 0 4px rgba(120, 220, 255, 0.4));
 }
 
 .system-info h3 {
   font-size: 1.1rem;
-  color: #f5f5f5;
+  color: #e4f3ff;
   margin-bottom: 6px;
 }
 
 .bar-container {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
   height: 10px;
   border-radius: 8px;
   overflow: hidden;
   width: 200px;
+  box-shadow: inset 0 0 8px rgba(60, 120, 220, 0.3);
 }
 
 .bar {
   height: 100%;
-  background: linear-gradient(to right, #9dc3ff, #c0ffc0);
-  transition: width 0.5s ease;
+  background: linear-gradient(90deg, #5cb6ff, #b3ffe8);
+  transition: width 1.2s ease;
 }
 
 .system span {
   font-size: 0.9rem;
   margin-left: 10px;
-  color: #bfbfbf;
+  color: #b7d9ff;
 }
 
 /* ---------- CONTROL PANEL ---------- */
@@ -200,19 +205,20 @@ html, body {
 
 .event-log {
   flex: 1;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(15, 25, 50, 0.5);
   padding: 20px;
   border-radius: 15px;
   font-size: 0.95rem;
   line-height: 1.4;
-  color: #d9d9d9;
-  backdrop-filter: blur(8px);
+  color: #cfeaff;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px rgba(30, 80, 160, 0.3);
 }
 
 .event-log h3 {
   margin-bottom: 10px;
   font-weight: 500;
-  color: #f1f1f1;
+  color: #e8f8ff;
 }
 
 #event-text {
@@ -220,20 +226,21 @@ html, body {
 }
 
 .next-btn {
-  background: linear-gradient(145deg, #222, #333);
-  color: #fafafa;
-  border: none;
+  background: linear-gradient(145deg, #132447, #1b2f5a);
+  color: #e8f0ff;
+  border: 1px solid rgba(100, 150, 255, 0.3);
   padding: 15px 30px;
   border-radius: 12px;
   font-size: 1rem;
   cursor: pointer;
   margin-left: 30px;
-  transition: transform 0.3s ease, background 0.3s ease;
+  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
 }
 
 .next-btn:hover {
   transform: translateY(-2px);
-  background: linear-gradient(145deg, #2a2a2a, #3a3a3a);
+  background: linear-gradient(145deg, #1a2d5a, #24407e);
+  box-shadow: 0 0 12px rgba(120, 200, 255, 0.4);
 }
 
 /* ---------- OVERLAY ---------- */
@@ -241,7 +248,7 @@ html, body {
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(5, 10, 30, 0.9);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -253,20 +260,23 @@ html, body {
 }
 
 .message-box {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(15, 25, 60, 0.7);
   padding: 40px 60px;
   border-radius: 20px;
   text-align: center;
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 0 30px rgba(50, 120, 220, 0.3);
 }
 
 .message-box h2 {
   font-size: 1.8rem;
   margin-bottom: 10px;
+  color: #aee9ff;
+  text-shadow: 0 0 12px rgba(100, 200, 255, 0.5);
 }
 
 .message-box p {
-  color: #cfcfcf;
+  color: #cce9ff;
   margin-bottom: 25px;
 }
 
@@ -274,7 +284,7 @@ html, body {
   padding: 12px 25px;
   border: none;
   border-radius: 10px;
-  background: #333;
+  background: linear-gradient(90deg, #174a7c, #1f72a6);
   color: white;
   font-size: 1rem;
   cursor: pointer;
@@ -282,28 +292,29 @@ html, body {
 }
 
 .message-box button:hover {
-  background: #444;
+  background: linear-gradient(90deg, #1b5a8f, #219cd3);
+  box-shadow: 0 0 10px rgba(90, 180, 255, 0.4);
 }
+
+/* ---------- CREW SELECTION ---------- */
 .crew.selected {
-  border: 2px solid #7fffd4;
-  box-shadow: 0 0 12px #7fffd4;
+  border: 2px solid #4affff;
+  box-shadow: 0 0 16px #00e5ff;
   transform: scale(1.1);
 }
 
-.bar {
-  transition: width 1.5s ease;
-}
+/* ---------- INTRO SCREEN ---------- */
 .intro-screen {
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle at center, #000010 0%, #000 100%);
+  background: radial-gradient(circle at center, #031532 0%, #000c1f 100%);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   z-index: 100;
   text-align: center;
-  color: #7fffd4;
+  color: #9ff;
   font-family: 'Poppins', sans-serif;
   overflow: hidden;
 }
@@ -312,22 +323,24 @@ html, body {
   font-size: 2rem;
   margin-bottom: 20px;
   letter-spacing: 2px;
+  color: #b0e8ff;
+  text-shadow: 0 0 10px rgba(100, 200, 255, 0.5);
 }
 
 #intro-text {
   max-width: 600px;
   font-size: 1rem;
   line-height: 1.6;
-  color: #cfcfcf;
-  text-shadow: 0 0 8px #7fffd4;
+  color: #d0e9ff;
+  text-shadow: 0 0 8px #66faff;
   margin-bottom: 40px;
   min-height: 100px;
 }
 
 #launch-btn {
-  background: linear-gradient(90deg, #0ff, #09f);
+  background: linear-gradient(90deg, #2cf5ff, #2c84ff);
   border: none;
-  color: #000;
+  color: #001230;
   padding: 14px 32px;
   border-radius: 10px;
   font-size: 1.1rem;
@@ -337,11 +350,17 @@ html, body {
 
 #launch-btn:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 20px #09f;
+  box-shadow: 0 0 25px #2c84ff;
 }
+
 .fade-out {
   animation: fadeOut 1.5s forwards;
 }
+
 @keyframes fadeOut {
-  to { opacity: 0; transform: scale(1.05); visibility: hidden; }
+  to {
+    opacity: 0;
+    transform: scale(1.05);
+    visibility: hidden;
+  }
 }
