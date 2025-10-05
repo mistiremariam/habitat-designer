@@ -1,5 +1,48 @@
 // ---------- HABITAT MINI-GAME (LIVE SIM MODE) ----------
 document.addEventListener("DOMContentLoaded", () => {
+  const introScreen = document.getElementById("intro-screen");
+  const introText = document.getElementById("intro-text");
+  const launchBtn = document.getElementById("launch-btn");
+
+  const briefing = [
+    "Commander, welcome aboard the Orbital Habitat One.",
+    "Your mission: Maintain life support systems for 24 space hours.",
+    "Assign your crew wisely to balance oxygen, power, water, and temperature.",
+    "Survive the void. Humanity depends on your success."
+  ];
+
+  let i = 0, j = 0;
+  function typeEffect() {
+    if (i < briefing.length) {
+      if (j < briefing[i].length) {
+        introText.textContent += briefing[i][j];
+        j++;
+        setTimeout(typeEffect, 30);
+      } else {
+        introText.textContent += "\n\n";
+        i++;
+        j = 0;
+        setTimeout(typeEffect, 400);
+      }
+    } else {
+      launchBtn.style.opacity = 1;
+      launchBtn.style.pointerEvents = "auto";
+    }
+  }
+
+  typeEffect();
+
+  launchBtn.addEventListener("click", () => {
+    document.getElementById("ui-click")?.play();
+    introScreen.classList.add("fade-out");
+    setTimeout(() => {
+      introScreen.remove();
+      // start ambient background sound or show crew bios
+    }, 1500);
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
   const hourDisplay = document.getElementById("hour-display");
   const eventText = document.getElementById("event-text");
   const overlay = document.getElementById("overlay");

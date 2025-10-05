@@ -302,3 +302,55 @@ html, body {
 .bar {
   transition: width 1.5s ease;
 }
+.intro-screen {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, #000010 0%, #000 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  text-align: center;
+  color: #7fffd4;
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
+}
+
+.intro-content h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+}
+
+#intro-text {
+  max-width: 600px;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #cfcfcf;
+  text-shadow: 0 0 8px #7fffd4;
+  margin-bottom: 40px;
+  min-height: 100px;
+}
+
+#launch-btn {
+  background: linear-gradient(90deg, #0ff, #09f);
+  border: none;
+  color: #000;
+  padding: 14px 32px;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#launch-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #09f;
+}
+.fade-out {
+  animation: fadeOut 1.5s forwards;
+}
+@keyframes fadeOut {
+  to { opacity: 0; transform: scale(1.05); visibility: hidden; }
+}
