@@ -293,3 +293,12 @@ html, body {
 .message-box button:hover {
   background: #444;
 }
+.crew.selected {
+  border: 2px solid #7fffd4;
+  box-shadow: 0 0 12px #7fffd4;
+  transform: scale(1.1);
+}
+
+.bar {
+  transition: width 1.5s ease;
+}
