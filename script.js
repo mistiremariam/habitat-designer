@@ -1,5 +1,6 @@
 // ---------- HABITAT MINI-GAME (LIVE SIM MODE) ----------
 document.addEventListener("DOMContentLoaded", () => {
+  // --- INTRO SCREEN ---
   const introScreen = document.getElementById("intro-screen");
   const introText = document.getElementById("intro-text");
   const launchBtn = document.getElementById("launch-btn");
@@ -12,12 +13,13 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   let i = 0, j = 0;
+
   function typeEffect() {
     if (i < briefing.length) {
       if (j < briefing[i].length) {
         introText.textContent += briefing[i][j];
         j++;
-        setTimeout(typeEffect, 30);
+        setTimeout(typeEffect, 25);
       } else {
         introText.textContent += "\n\n";
         i++;
@@ -25,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(typeEffect, 400);
       }
     } else {
-      launchBtn.style.opacity = 1;
+      launchBtn.style.opacity = "1";
       launchBtn.style.pointerEvents = "auto";
     }
   }
@@ -37,12 +39,11 @@ document.addEventListener("DOMContentLoaded", () => {
     introScreen.classList.add("fade-out");
     setTimeout(() => {
       introScreen.remove();
-      // start ambient background sound or show crew bios
+      // You could start ambient sound or open crew briefing here
     }, 1500);
   });
-});
 
-document.addEventListener("DOMContentLoaded", () => {
+  // --- MAIN SIMULATION SETUP ---
   const hourDisplay = document.getElementById("hour-display");
   const eventText = document.getElementById("event-text");
   const overlay = document.getElementById("overlay");
@@ -78,33 +79,33 @@ document.addEventListener("DOMContentLoaded", () => {
       if (selectedCrew === crew) {
         crew.classList.remove("selected");
         selectedCrew = null;
-        return;
+      } else {
+        crewMembers.forEach(c => c.classList.remove("selected"));
+        crew.classList.add("selected");
+        selectedCrew = crew;
       }
-      crewMembers.forEach(c => c.classList.remove("selected"));
-      crew.classList.add("selected");
-      selectedCrew = crew;
     });
   });
 
   // --- ASSIGN CREW TO SYSTEM ---
-  systemPanels.forEach(system => {
-    system.addEventListener("click", () => {
+  systemPanels.forEach(panel => {
+    panel.addEventListener("click", () => {
       if (!selectedCrew) return;
-      const systemName = system.dataset.system;
+      const systemName = panel.dataset.system;
       const crewName = selectedCrew.querySelector("span").textContent;
 
-      // Remove previous assignment
-      for (let key in crewAssignments) {
-        if (crewAssignments[key] === crewName) {
-          delete crewAssignments[key];
-        }
+      // Remove any previous assignment of this crew
+      for (const key in crewAssignments) {
+        if (crewAssignments[key] === crewName) delete crewAssignments[key];
       }
 
+      // Assign
       crewAssignments[systemName] = crewName;
 
-      // Update UI
-      const label = system.querySelector("h3");
-      label.innerHTML = `${systemName[0].toUpperCase() + systemName.slice(1)} <span style="font-size:0.8rem; color:#7fffd4;">(${crewName})</span>`;
+      // Update UI label
+      const label = panel.querySelector("h3");
+      label.innerHTML = `${systemName[0].toUpperCase() + systemName.slice(1)} 
+        <span style="font-size:0.8rem; color:#7fffd4;">(${crewName})</span>`;
 
       selectedCrew.classList.remove("selected");
       selectedCrew = null;
@@ -117,9 +118,11 @@ document.addEventListener("DOMContentLoaded", () => {
   let running = false;
   const hourDuration = 4000; // 1 hour = 4 seconds
 
-  // --- START / PAUSE BUTTON ---
+  // --- CONTROL BUTTON ---
   nextBtn.textContent = "Start Mission ▶️";
   nextBtn.addEventListener("click", () => {
+    if (nextBtn.textContent.includes("Restart")) return resetGame();
+
     if (!running) {
       running = true;
       nextBtn.textContent = "Pause ⏸️";
@@ -134,11 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- SIMULATION LOOP ---
   function startSimulation() {
     interval = setInterval(() => {
-      if (hour >= 24) {
-        clearInterval(interval);
-        return endGame(true);
-      }
-
+      if (hour >= 24) return endGame(true);
       hour++;
       hourDisplay.textContent = hour;
       updateSystems();
@@ -148,27 +147,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // --- SYSTEM UPDATES ---
   function updateSystems() {
-    let log = [];
+    const log = [];
 
     for (const system in systemValues) {
-      let decay = Math.random() * 10 + 6;
-      let bonus = 0;
-
-      if (crewAssignments[system]) {
-        bonus = 7;
-        log.push(`🧑‍🚀 ${crewAssignments[system]} stabilized ${system}.`);
-      } else {
-        log.push(`⚠️ ${system} unattended, levels dropping.`);
-      }
+      const decay = Math.random() * 10 + 6;
+      const assignedCrew = crewAssignments[system];
+      const bonus = assignedCrew ? 7 : 0;
 
       systemValues[system] = Math.max(0, systemValues[system] - (decay - bonus));
-
-      // Animate progress bars
       systems[system].style.width = `${systemValues[system]}%`;
       document.getElementById(`${system}-value`).textContent = `${Math.round(systemValues[system])}%`;
+
+      if (assignedCrew)
+        log.push(`🧑‍🚀 ${assignedCrew} stabilized ${system}.`);
+      else
+        log.push(`⚠️ ${system} unattended, levels dropping.`);
     }
 
-    const events = [
+    const randomEvents = [
       "☄️ A small meteor passed nearby.",
       "🌕 Solar radiation disrupted power.",
       "💧 Water recycler overloaded.",
@@ -176,24 +172,23 @@ document.addEventListener("DOMContentLoaded", () => {
       "🔋 Solar panels charging smoothly.",
       "🛰️ Communication relay aligned."
     ];
-    log.push(events[Math.floor(Math.random() * events.length)]);
+    log.push(randomEvents[Math.floor(Math.random() * randomEvents.length)]);
+
     eventText.innerHTML = log.join("<br>");
   }
 
   // --- STATUS CHECK ---
   function checkStatus() {
-    const values = Object.values(systemValues);
-    if (values.some(v => v <= 0)) {
-      clearInterval(interval);
+    if (Object.values(systemValues).some(v => v <= 0)) {
       endGame(false);
-    } else if (hour === 24) {
-      clearInterval(interval);
+    } else if (hour >= 24) {
       endGame(true);
     }
   }
 
   // --- END GAME ---
   function endGame(success) {
+    clearInterval(interval);
     overlay.classList.remove("hidden");
     running = false;
     nextBtn.textContent = "Restart ▶️";
@@ -209,30 +204,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // --- RESTART ---
   restartBtn.addEventListener("click", resetGame);
-  nextBtn.addEventListener("click", () => {
-    if (nextBtn.textContent === "Restart ▶️") resetGame();
-  });
 
   function resetGame() {
+    clearInterval(interval);
     overlay.classList.add("hidden");
     hour = 1;
     hourDisplay.textContent = hour;
+
     for (const key in systemValues) {
       systemValues[key] = 100;
       systems[key].style.width = "100%";
       document.getElementById(`${key}-value`).textContent = "100%";
     }
+
     crewAssignments = {};
     document.querySelectorAll(".system h3").forEach(el => {
       el.innerHTML = el.textContent.split(" ")[0];
     });
+
     eventText.textContent = "Mission restarted. Assign your crew and continue.";
     nextBtn.textContent = "Start Mission ▶️";
     running = false;
-    clearInterval(interval);
   }
 
   
-
   fetchEarthImage();
 });
