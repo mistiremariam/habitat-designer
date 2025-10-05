@@ -14,7 +14,7 @@ html, body {
 }
 
 /* ---------- STAR BACKGROUND LAYERS ---------- */
-.stars, .stars2, .stars3 {
+.stars{
   position: fixed;
   width: 100%;
   height: 100%;
@@ -28,19 +28,10 @@ html, body {
 }
 
 .stars {
-  background-image: url('./assets/');
+  background-image: url('./assets/background.jpeg');
   animation: moveStars 100s linear infinite;
 }
-.stars2 {
-  background-image: url('assets/stars2.png');
-  animation: moveStars 160s linear infinite;
-  opacity: 0.2;
-}
-.stars3 {
-  background-image: url('assets/stars3.png');
-  animation: moveStars 240s linear infinite;
-  opacity: 0.15;
-}
+
 
 @keyframes moveStars {
   from { background-position: 0 0; }

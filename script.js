@@ -232,24 +232,7 @@ document.addEventListener("DOMContentLoaded", () => {
     clearInterval(interval);
   }
 
-  // --- NASA BACKGROUND (SPACE VIBE) ---
-  async function fetchEarthImage() {
-    try {
-      const response = await fetch('https://epic.gsfc.nasa.gov/api/natural');
-      const data = await response.json();
-      if (data.length > 0) {
-        const date = data[0].date.split(' ')[0].replace(/-/g, '/');
-        const image = data[0].image;
-        const imageUrl = `https://epic.gsfc.nasa.gov/archive/natural/${date}/jpg/${image}.jpg`;
-        document.body.style.backgroundImage = `url(${imageUrl})`;
-        document.body.style.backgroundSize = "cover";
-        document.body.style.backgroundPosition = "center";
-        document.body.style.transition = "background 2s ease";
-      }
-    } catch {
-      console.log("NASA API unavailable, using default background.");
-    }
-  }
+  
 
   fetchEarthImage();
 });
